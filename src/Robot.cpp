@@ -11,6 +11,14 @@ int angulo_brazo=90;
 Servo giro;
 int angulo_giro=90;
 
+//Valoresanteriores leidos
+int A1_anterior = 0;
+
+//Valores actuales
+int A0_actual;
+int A1_actual;
+int A2_actual;
+
 void setup(){
   pinza.attach(13, 500, 1480);
   pinza.write(45);
@@ -24,8 +32,14 @@ void setup(){
   pinMode(A0,INPUT);
 }
 void loop(){
+A0_actual = analogRead(A0);  
+A1_actual = analogRead(A1);  
+A2_actual = analogRead(A2);  
   //Joystick para el brazo
-  if (analogRead(A1)<200 && angulo_brazo<180){
+  if (A1_actual != A1_anterior){
+    A1_anterior = A1_actual;
+  if (A1_actual<200 &&  angulo_brazo<180){
+    
     angulo_brazo++;
     brazo.write(angulo_brazo);
   }
@@ -33,7 +47,7 @@ void loop(){
     angulo_brazo--;
     brazo.write(angulo_brazo);
   }
-  
+  }
   //Joystick para el giro
   if (analogRead(A2)<200 && angulo_giro<180){
     angulo_giro++;
