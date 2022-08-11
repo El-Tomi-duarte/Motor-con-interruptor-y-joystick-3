@@ -12,7 +12,9 @@ Servo giro;
 int angulo_giro=90;
 
 //Valoresanteriores leidos
+int A0_anterior = 0;
 int A1_anterior = 0;
+int A2_anterior = 0;
 
 //Valores actuales
 int A0_actual;
@@ -49,6 +51,8 @@ A2_actual = analogRead(A2);
   }
   }
   //Joystick para el giro
+   if (A2_actual != A2_anterior){
+    A2_anterior = A2_actual;
   if (analogRead(A2)<200 && angulo_giro<180){
     angulo_giro++;
     giro.write(angulo_giro);
@@ -57,7 +61,7 @@ A2_actual = analogRead(A2);
     angulo_giro--;
     giro.write(angulo_giro);
   }
-  
+   }
   //Interruptor de la pinza
   boton=digitalRead(A0);
   
