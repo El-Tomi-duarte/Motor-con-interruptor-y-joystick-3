@@ -2,7 +2,7 @@
 
 #include <Servo.h>
 Servo pinza;
-int angulo_pinza=44;
+int angulo_pinza=45;
 int boton=45;
 
 Servo brazo;
